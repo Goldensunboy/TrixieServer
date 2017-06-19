@@ -1,0 +1,35 @@
+<DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>$TITLE</title>
+		<script language="javascript" type="text/javascript" src="/resources/swfobject.js"></script>
+	</head>
+	<body style="background-color:#DFDFFF">
+		<p><a href="..">Back</a></p>
+		<p>$TITLE</p>
+		<div>
+			<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+			<script type="text/javascript" src="/resources/jquery-1.6.1.min.js"></script>
+			<script type="text/javascript" src="/resources/jquery-jplayer/jquery.jplayer.js"></script>
+			<script type="text/javascript" src="/resources/ttw-music-player-min.js"></script>
+			<script type="text/javascript">
+				var playlist = [
+					$APPLET
+				];
+				$(document).ready(function() {
+					$('body').ttwMusicPlayer(playlist, {
+						autoPlay:true,
+						description:'Now playing $TITLE',
+						jPlayer: {
+							swfPath:'/resources/jquery-jplayer'
+						}
+					});
+				});
+			</script>
+		</div>
+		<table border=1>
+			$TABLE
+		</table>
+	</body>
+</html>
+
