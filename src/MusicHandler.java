@@ -8,11 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -24,7 +19,7 @@ import com.sun.net.httpserver.HttpHandler;
 public class MusicHandler implements HttpHandler {
 	
 	/** Static data */
-	private static final String CONTENT_DIR = "content/music";
+	public static final String CONTENT_DIR = "content/music";
 	private static final int TABLE_WIDTH = 3;
 	
 	/** Root content directory */
@@ -100,15 +95,7 @@ public class MusicHandler implements HttpHandler {
 					tableStr += "<tr><td><a href=\"" + albumURL + songTitle + "\">" +
 							songTitle + "</a></tr></td>";
 				}
-				String appletStr = "";
-				for(File f : songs) {
-					AudioFile af = AudioFileIO.read(f);
-					Tag t = af.getTag();
-					appletStr += "{mp3:\"" + albumURL + f.getName() + "\",";
-					appletStr += "title:\"" + t.getFirst(FieldKey.TITLE) + "\",";
-					appletStr += "artist:\"" + t.getFirst(FieldKey.ARTIST) + "\",";
-					appletStr += "cover:\"" + albumURL + "cover.jpg\"},";
-				}
+				String appletStr = TrixieCacheUtils.getAppletData(albumDir);
 				// Add table and applet to template
 				String page = TrixieServerUtils.GetTemplate("album.html");
 				page = page.replaceAll("\\$TITLE", albumTitle);

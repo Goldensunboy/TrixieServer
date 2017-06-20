@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 import com.sun.net.httpserver.HttpServer;
@@ -40,6 +41,9 @@ public class TrixieServer {
 		hs.createContext("/resources/", new ResourcesHandler(RootDir));
 		hs.setExecutor(null);
 		hs.start();
+		
+		// Cache the album directories
+		TrixieCacheUtils.preCacheAppletData(Paths.get(RootDir, MusicHandler.CONTENT_DIR).toFile());
 	}
 	
 	/**
